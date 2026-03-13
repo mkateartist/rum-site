@@ -1,0 +1,69 @@
+local_backend: true
+backend:
+  name: github
+  repo: REPLACE_WITH_GITHUB_USER/REPLACE_WITH_REPO
+  branch: main
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+publish_mode: editorial_workflow
+site_url: "/"
+collections:
+  - name: "issues"
+    label: "Выпуски журнала"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "issues_data"
+        label: "Список выпусков"
+        file: "assets/content-issues.json"
+        fields:
+          - label: "Выпуски"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.year}} — № {{fields.num}}"
+            fields:
+              - {label: "ID", name: "id", widget: "string", required: false, hint: "Например: 2026-2. Если оставить пустым, сайт сам соберет ID из года и номера."}
+              - {label: "Год", name: "year", widget: "number", value_type: "int", min: 2018}
+              - {label: "Номер", name: "num", widget: "number", value_type: "int", min: 1, max: 12}
+              - {label: "Короткий заголовок", name: "subtitle", widget: "string", required: false}
+              - {label: "Основной заголовок", name: "title", widget: "text"}
+              - {label: "Обложка", name: "cover", widget: "image", choose_url: false, allow_multiple: false}
+              - label: "Доступ"
+                name: "access"
+                widget: "select"
+                options:
+                  - {label: "Открытый архив", value: "open"}
+                  - {label: "По подписке", value: "subscription"}
+              - {label: "Ссылка на PDF", name: "pdf_link", widget: "string", required: false, hint: "Можно вставить внешнюю ссылку, например Яндекс.Диск"}
+              - {label: "PDF-файл", name: "pdf_file", widget: "file", required: false, media_library: {config: {multiple: false}}}
+              - label: "3 блока выпуска"
+                name: "sections"
+                widget: "list"
+                required: false
+                min: 0
+                max: 3
+                fields:
+                  - {label: "Название блока", name: "title", widget: "string"}
+                  - {label: "Текст блока", name: "text", widget: "text"}
+  - name: "news"
+    label: "Новости"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "news_data"
+        label: "Список новостей"
+        file: "assets/content-news.json"
+        fields:
+          - label: "Новости"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - {label: "ID", name: "id", widget: "string", required: false, hint: "Можно оставить пустым"}
+              - {label: "Дата", name: "date", widget: "string", hint: "Формат: 20.02.2026"}
+              - {label: "Заголовок", name: "title", widget: "text"}
+              - {label: "Картинка", name: "image", widget: "image", required: false, choose_url: false, allow_multiple: false}
+              - {label: "Короткий анонс", name: "excerpt", widget: "text", required: false}
+              - {label: "Основной текст", name: "body", widget: "text", required: false}
