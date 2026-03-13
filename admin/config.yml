@@ -1,12 +1,10 @@
-local_backend: true
 backend:
   name: git-gateway
-  repo: mkateartist/rum-site
   branch: main
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 publish_mode: editorial_workflow
-site_url: "/"
+site_url: "https://journalrum1.netlify.app"
 collections:
   - name: "issues"
     label: "Выпуски журнала"
