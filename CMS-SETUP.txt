@@ -1,0 +1,13 @@
+РУМ — Decap CMS
+
+1. Откройте папку admin и файл config.yml.
+2. Замените строку repo: REPLACE_WITH_GITHUB_USER/REPLACE_WITH_REPO на адрес вашего GitHub-репозитория.
+   Пример: repo: mkateartist/rum-site
+3. Разместите сайт в репозитории GitHub.
+4. После этого можно публиковать сайт на Netlify, Timeweb или другом хостинге.
+5. Для входа в CMS откройте /admin/
+
+Важно:
+- Контент редактируется в двух файлах: assets/content-issues.json и assets/content-news.json.
+- Картинки и PDF загружаются в папку assets/uploads.
+- Новые выпуски будут автоматически появляться на главной, в архиве и на странице issue.html.
