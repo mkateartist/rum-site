@@ -1,7 +1,7 @@
 local_backend: true
 backend:
-  name: github
-  repo: REPLACE_WITH_GITHUB_USER/REPLACE_WITH_REPO
+  name: github-gateway
+  repo: mkateartist/rum-site
   branch: main
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
