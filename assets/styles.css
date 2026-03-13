@@ -169,3 +169,8 @@ h4{font-size:1rem;line-height:1.34}
 @media (max-width:350px){
   .archive-grid{grid-template-columns:1fr}
 }
+
+
+.menu a[href="admin/"]{border:1px solid rgba(255,255,255,.14);padding:10px 14px;border-radius:999px}
+.brandline .rum img{display:block;max-height:32px;width:auto}
+@media (max-width:860px){.menu{gap:8px 10px}.menu a[href="admin/"]{padding:8px 12px;font-size:.78rem}}

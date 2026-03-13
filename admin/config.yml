@@ -2,57 +2,67 @@ backend:
   name: git-gateway
   branch: main
 
-locale: 'ru'
-publish_mode: simple
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
-site_url: /
-logo_url: /assets/rum-logo-real.png
+publish_mode: simple
+locale: "ru"
+site_url: "/"
+logo_url: "/assets/rum-logo-real.png"
 
 collections:
-  - name: "site_data"
-    label: "Контент сайта"
+  - name: "issues"
+    label: "Выпуски журнала"
+    delete: false
     editor:
       preview: false
     files:
-      - name: "issues"
-        label: "Выпуски журнала"
+      - name: "issues_data"
+        label: "Список выпусков"
         file: "assets/content-issues.json"
-        format: "json"
         fields:
           - label: "Выпуски"
             name: "items"
             widget: "list"
-            summary: "№ {{fields.num}} / {{fields.year}} — {{fields.title}}"
+            summary: "{{fields.year}} — № {{fields.num}}"
             fields:
-              - {label: "Год", name: "year", widget: "number", value_type: "int", min: 2018, step: 1}
-              - {label: "Номер", name: "num", widget: "number", value_type: "int", min: 1, step: 1}
-              - {label: "Заголовок / тема выпуска", name: "title", widget: "string"}
+              - {label: "ID", name: "id", widget: "string", required: false, hint: "Например: 2026-2"}
+              - {label: "Год", name: "year", widget: "number", value_type: "int", min: 2018}
+              - {label: "Номер", name: "num", widget: "number", value_type: "int", min: 1, max: 12}
+              - {label: "Заголовок выпуска", name: "title", widget: "text"}
               - {label: "Обложка", name: "cover", widget: "image", choose_url: false, allow_multiple: false}
-              - label: "Тип доступа"
+              - label: "Доступ"
                 name: "access"
                 widget: "select"
                 options:
                   - {label: "Открытый архив", value: "open"}
                   - {label: "По подписке", value: "subscription"}
-              - {label: "Ссылка на PDF", name: "pdf", widget: "string", required: false}
-              - {label: "Заголовок блока 1", name: "topic_heading", widget: "string", required: false, default: "Тема номера"}
-              - {label: "Текст блока 1", name: "topic_text", widget: "text", required: false}
-              - {label: "Заголовок блока 2", name: "law_heading", widget: "string", required: false, default: "Правовой вопрос"}
-              - {label: "Текст блока 2", name: "law_text", widget: "text", required: false}
-              - {label: "Заголовок блока 3", name: "norm_heading", widget: "string", required: false, default: "Нормативно-техническое обеспечение"}
-              - {label: "Текст блока 3", name: "norm_text", widget: "text", required: false}
-      - name: "news"
-        label: "Новости"
+              - {label: "Ссылка на PDF", name: "pdf_link", widget: "string", required: false}
+              - {label: "Старая страница выпуска", name: "page", widget: "string", required: false, hint: "Для уже существующих выпусков можно не менять"}
+              - label: "Блоки выпуска"
+                name: "sections"
+                widget: "list"
+                required: false
+                fields:
+                  - {label: "Название блока", name: "title", widget: "string"}
+                  - {label: "Текст блока", name: "text", widget: "text"}
+  - name: "news"
+    label: "Новости"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "news_data"
+        label: "Список новостей"
         file: "assets/content-news.json"
-        format: "json"
         fields:
           - label: "Новости"
             name: "items"
             widget: "list"
             summary: "{{fields.date}} — {{fields.title}}"
             fields:
-              - {label: "Дата", name: "date", widget: "string", hint: "Например: 20.02.2026"}
-              - {label: "Заголовок", name: "title", widget: "string"}
-              - {label: "Основной текст", name: "body", widget: "text"}
+              - {label: "ID", name: "id", widget: "string", required: false}
+              - {label: "Дата", name: "date", widget: "string", hint: "Формат: 20.02.2026"}
+              - {label: "Заголовок", name: "title", widget: "text"}
               - {label: "Картинка", name: "image", widget: "image", required: false, choose_url: false, allow_multiple: false}
+              - {label: "Короткий анонс", name: "excerpt", widget: "text", required: false}
+              - {label: "Основной текст", name: "body", widget: "text", required: false}
